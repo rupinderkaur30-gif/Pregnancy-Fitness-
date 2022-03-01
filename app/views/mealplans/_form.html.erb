@@ -1,0 +1,42 @@
+<%= form_with(model: mealplan, local: true) do |form| %>
+  <% if mealplan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mealplan.errors.count, "error") %> prohibited this mealplan from being saved:</h2>
+
+      <ul>
+      <% mealplan.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :breakfast %>
+    <%= form.text_field :breakfast %>
+  </div>
+
+  <div class="field">
+    <%= form.label :snack %>
+    <%= form.text_field :snack %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lunch %>
+    <%= form.text_field :lunch %>
+  </div>
+
+  <div class="field">
+    <%= form.label :snack %>
+    <%= form.text_field :snack %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dinner %>
+    <%= form.text_field :dinner %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
