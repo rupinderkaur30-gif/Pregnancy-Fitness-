@@ -5,6 +5,7 @@ class CreateMeals < ActiveRecord::Migration[5.2]
       t.string :image
       t.text :description
       t.string :meal_type
+      t.integer :mealplan_id
     end
   end
 end
