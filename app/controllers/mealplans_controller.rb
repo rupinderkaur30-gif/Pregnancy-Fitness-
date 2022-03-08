@@ -4,6 +4,7 @@ class MealplansController < ApplicationController
   # GET /mealplans or /mealplans.json
   def index
     @mealplans = Mealplan.all
+    render json: @mealplans
   end
 
   # GET /mealplans/1 or /mealplans/1.json
