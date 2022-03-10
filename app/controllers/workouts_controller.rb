@@ -22,17 +22,9 @@ class WorkoutsController < ApplicationController
 
   # POST /workouts or /workouts.json
   def create
-    @workout = Workout.new(workout_params)
+    @workout = Workout.create(workout_params)
+    render json: @workout
 
-    respond_to do |format|
-      if @workout.save
-        format.html { redirect_to workout_url(@workout), notice: "Workout was successfully created." }
-        format.json { render :show, status: :created, location: @workout }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @workout.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /workouts/1 or /workouts/1.json
@@ -66,6 +58,6 @@ class WorkoutsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workout_params
-      params.require(:workout).permit(:name)
+      params.require(:workout).permit(:name, :user_id)
     end
 end

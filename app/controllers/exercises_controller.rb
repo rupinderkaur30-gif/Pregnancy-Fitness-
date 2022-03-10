@@ -21,17 +21,9 @@ class ExercisesController < ApplicationController
 
   # POST /exercises or /exercises.json
   def create
-    @exercise = Exercise.new(exercise_params)
+    @exercise = Exercise.create(exercise_params)
+    render json: @exercise
 
-    respond_to do |format|
-      if @exercise.save
-        format.html { redirect_to exercise_url(@exercise), notice: "Exercise was successfully created." }
-        format.json { render :show, status: :created, location: @exercise }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @exercise.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /exercises/1 or /exercises/1.json
@@ -65,6 +57,6 @@ class ExercisesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def exercise_params
-      params.require(:exercise).permit(:name, :minute, :discription, :equipment, :targetareas)
+      params.require(:exercise).permit(:name, :video_url, :minute, :description, :equipment, :targetareas, :workout_id, :user_id)
     end
 end
