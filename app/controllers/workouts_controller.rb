@@ -24,7 +24,6 @@ class WorkoutsController < ApplicationController
   def create
     @workout = Workout.create(workout_params)
     render json: @workout
-
   end
 
   # PATCH/PUT /workouts/1 or /workouts/1.json
@@ -43,11 +42,7 @@ class WorkoutsController < ApplicationController
   # DELETE /workouts/1 or /workouts/1.json
   def destroy
     @workout.destroy
-
-    respond_to do |format|
-      format.html { redirect_to workouts_url, notice: "Workout was successfully destroyed." }
-      format.json { head :no_content }
-    end
+      render json: {}
   end
 
   private
@@ -58,6 +53,6 @@ class WorkoutsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workout_params
-      params.require(:workout).permit(:name, :id)
+      params.require(:workout).permit(:name, :user_id)
     end
 end
