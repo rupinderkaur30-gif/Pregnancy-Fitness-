@@ -22,17 +22,8 @@ class MealsController < ApplicationController
 
   # POST /meals or /meals.json
   def create
-    @meal = Meal.new(meal_params)
-
-    respond_to do |format|
-      if @meal.save
-        format.html { redirect_to meal_url(@meal), notice: "Meal was successfully created." }
-        format.json { render :show, status: :created, location: @meal }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @meal.errors, status: :unprocessable_entity }
-      end
-    end
+    @meal = Meal.create(meal_params)
+    render json: @meal
   end
 
   # PATCH/PUT /meals/1 or /meals/1.json
@@ -51,11 +42,7 @@ class MealsController < ApplicationController
   # DELETE /meals/1 or /meals/1.json
   def destroy
     @meal.destroy
-
-    respond_to do |format|
-      format.html { redirect_to meals_url, notice: "Meal was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    render json: {}
   end
 
   private
@@ -66,6 +53,6 @@ class MealsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def meal_params
-      params.fetch(:meal, {})
+      params.require(:meal).permit(:name, :image, :ingredients, :instructions, :prep_time, :mealplan_id, :user_id )
     end
 end
