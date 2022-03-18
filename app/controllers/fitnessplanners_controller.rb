@@ -22,17 +22,9 @@ class FitnessplannersController < ApplicationController
 
   # POST /fitnessplanners or /fitnessplanners.json
   def create
-    @fitnessplanner = Fitnessplanner.new(fitnessplanner_params)
+    @fitnessplanner = Fitnessplanner.create(fitnessplanner_params)
+    render json: @fitnessplanner
 
-    respond_to do |format|
-      if @fitnessplanner.save
-        format.html { redirect_to fitnessplanner_url(@fitnessplanner), notice: "Fitnessplanner was successfully created." }
-        format.json { render :show, status: :created, location: @fitnessplanner }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @fitnessplanner.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /fitnessplanners/1 or /fitnessplanners/1.json
